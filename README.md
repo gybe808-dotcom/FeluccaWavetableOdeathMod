@@ -8,9 +8,9 @@ A community wavetable synthesizer modification for the M-VAVE FM-1, built on **F
 
 **[Open the GitHub Pages installer](https://gybe808-dotcom.github.io/FeluccaWavetableOdeathMod/)** (once Pages is enabled from `main`, `/ (root)` in repository Settings → Pages).
 
-Use Chrome or Edge desktop, connect an M-VAVE FM-1 via USB, and press Install. The installer first looks for the bundled firmware. Until that binary is uploaded to `firmware/felucca.fwsc`, choose your local SOLID 20 v0.7.5 `.fwsc` file using the file picker; it is checked locally against its published SHA-256 before installation is enabled. Do not unplug while flashing. Firmware modifications are at your own risk; have recovery tools available.
+Use Chrome or Edge desktop, connect an M-VAVE FM-1 via USB, and press Install. The installer first looks for the bundled firmware. Until that binary is uploaded to `firmware/felucca.fwsc`, choose your local Felucca WaveTable v0.7.5 v0.7.5 `.fwsc` file using the file picker; it is checked locally against its published SHA-256 before installation is enabled. Do not unplug while flashing. Firmware modifications are at your own risk; have recovery tools available.
 
-**Firmware version:** SOLID 20, v0.7.5. 20 waveforms, morphing, 4-voice wavetable synthesis, 8 bandlimiting levels and 9 presets.
+**Firmware version:** Felucca WaveTable v0.7.5, v0.7.5. 20 waveforms, morphing, 4-voice wavetable synthesis, 8 bandlimiting levels and 9 presets.
 
 ## Provenance & licensing
 
