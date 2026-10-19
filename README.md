@@ -1,7 +1,5 @@
-# FeluccaWavetableOdeathMod
-A free, open-source wavetable synthesizer modification for Felucca on the M-VAVE FM-1. Adds 20 waveforms, morphing, and a 4-voice synthesis engine while preserving Felucca's original features.
-
 # Felucca – ODeath Wavetable Mod
+A free, open-source wavetable synthesizer modification for Felucca on the M-VAVE FM-1. Adds 20 waveforms, morphing, and a 4-voice synthesis engine while preserving Felucca's original features.
 
 A community-developed wavetable synthesis expansion for **Felucca**, the custom firmware for the **M-VAVE FM-1** synthesizer.
 
