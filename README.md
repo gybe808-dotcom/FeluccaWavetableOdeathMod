@@ -8,7 +8,7 @@ A community wavetable synthesizer modification for the M-VAVE FM-1, built on **F
 
 **[Open the GitHub Pages installer](https://gybe808-dotcom.github.io/FeluccaWavetableOdeathMod/)** (once Pages is enabled from `main`, `/ (root)` in repository Settings → Pages).
 
-Use Chrome or Edge desktop, connect an M-VAVE FM-1 via USB, and press Install. The included SOLID 20 v0.7.5 package is checked against its published SHA-256 before any installation is enabled. Do not unplug while flashing. Firmware modifications are at your own risk; have recovery tools available.
+Use Chrome or Edge desktop, connect an M-VAVE FM-1 via USB, and press Install. The installer first looks for the bundled firmware. Until that binary is uploaded to `firmware/felucca.fwsc`, choose your local SOLID 20 v0.7.5 `.fwsc` file using the file picker; it is checked locally against its published SHA-256 before installation is enabled. Do not unplug while flashing. Firmware modifications are at your own risk; have recovery tools available.
 
 **Firmware version:** SOLID 20, v0.7.5. 20 waveforms, morphing, 4-voice wavetable synthesis, 8 bandlimiting levels and 9 presets.
 
@@ -18,11 +18,11 @@ This is **not an official Felucca release**. Felucca is the original firmware an
 
 Original authors and license obligations: [Felucca CREDITS.md](https://github.com/hugelton/Felucca/blob/main/CREDITS.md) · [LICENSING.md](https://github.com/hugelton/Felucca/blob/main/LICENSING.md) · [GPL-3.0-only](https://github.com/hugelton/Felucca/blob/main/LICENSE).
 
-The included `firmware/felucca.fwsc` was built from a modification of Felucca and contains components from the JieLi AC79 SDK. See the [Felucca licensing breakdown](https://github.com/hugelton/Felucca/blob/main/LICENSING.md) for the Apache-2.0 SDK components and other included works.
+The release binary `firmware/felucca.fwsc` (to be uploaded) was built from a modification of Felucca and contains components from the JieLi AC79 SDK. See the [Felucca licensing breakdown](https://github.com/hugelton/Felucca/blob/main/LICENSING.md) for the Apache-2.0 SDK components and other included works.
 
 **Public source-release requirement:** This binary release must be accompanied by its **complete corresponding modified source** (including build scripts, modifications, and required submodules), licensed consistently with Felucca's GPL-3.0-only terms. **The installer alone is not a complete source release.** Do not advertise this repository as a complete compliant firmware source distribution until the matching source has been published here.
 
-## Verified release binary
+## Verified release binary (upload pending)
 
 - Path: `firmware/felucca.fwsc`
 - Size: `610086` bytes
