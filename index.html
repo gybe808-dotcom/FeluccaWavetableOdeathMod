@@ -1,0 +1,89 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: GPL-3.0-only
+     Installer modification for Felucca – ODeath Wavetable Mod, 2026.
+     Original installer protocol and package code:
+     Copyright (C) 2026 Leo Kuroshita (@kurogedelic), Hügelton Instruments.
+     Based on https://github.com/hugelton/Felucca/tree/main/web -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Felucca – ODeath Wavetable Mod | Installer</title>
+<style>
+:root{color-scheme:dark;font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;background:#10151b;color:#eef4f7}
+body{margin:0}main{max-width:720px;margin:auto;padding:34px 20px 70px}
+h1{font-size:clamp(27px,5vw,38px);line-height:1.15;margin:10px 0}h2{font-size:18px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.17em;color:#72bdc2;text-transform:uppercase}
+.panel{background:#19232d;border:1px solid #334656;border-radius:14px;padding:22px;margin:24px 0}
+.warning{border-left:3px solid #e8a96a;padding-left:14px;color:#f4d9b7}
+button{background:#73c9ce;color:#101820;font:inherit;font-weight:750;padding:12px 20px;border:0;border-radius:7px;cursor:pointer}
+button:disabled{opacity:.35;cursor:default}button:focus-visible,a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+input[type=file]{display:block;width:100%;margin:10px 0 16px}
+progress{width:100%;height:12px}a{color:#86d9dd}small,.dim{color:#b5c3cc}
+code{word-break:break-all}pre{white-space:pre-wrap;word-break:break-word;font-size:12px;max-height:210px;overflow:auto}
+.state{font-weight:bold}footer{font-size:13px;color:#becbd2;border-top:1px solid #354553;padding-top:20px;margin-top:36px}
+</style></head><body><main>
+<div class="eyebrow">Community firmware • M-VAVE FM-1</div>
+<h1>Felucca <span style="color:#77cdd1">– ODeath Wavetable Mod</span></h1>
+<p>20 waveforms • 4-voice wavetable synthesis • SOLID 20 (v0.7.5)</p>
+<p>Based on <a href="https://github.com/hugelton/Felucca">Felucca</a> by <strong>Leo Kuroshita (@kurogedelic), Hügelton Instruments</strong>. The USB MIDI installer and firmware package handling are also their original work, reused under GPL-3.0-only.</p>
+<div class="panel"><h2>Install SOLID 20</h2>
+<p class="warning">Custom firmware can fail and leave your FM-1 in update mode. Have a verified recovery method ready. Do not disconnect USB while writing. Use at your own risk.</p>
+<p>Chrome or Edge on desktop is required for WebMIDI SysEx. Connect the FM-1 directly by a USB data cable, and close other MIDI apps.</p>
+<p class="dim">The firmware is loaded from this project's GitHub Pages site. It is checked locally against the exact published SHA-256 before installation.</p>
+<p id="firmware">Checking bundled firmware…</p>
+<p><button id="go" disabled>Install Felucca – ODeath SOLID 20</button></p>
+<progress id="bar" max="100" value="0"></progress>
+<p id="status" role="status" aria-live="polite">Preparing…</p>
+<details><summary>Technical log</summary><pre id="log"></pre></details>
+</div>
+<p><strong>Recovery:</strong> If installation is interrupted, reconnect the FM-1 and retry using the same package. Do not assume every failed flash can be recovered through the browser; see <a href="https://github.com/kurogedelic/FM-1-transporter">FM-1 Transporter</a> and the original Felucca instructions.</p>
+<footer><strong>Credits:</strong> Felucca firmware and original web installer: © 2026 Leo Kuroshita (@kurogedelic), <a href="https://hugelton.com">Hügelton Instruments</a>. Wavetable modification: ODeath. Felucca contributors and third-party software: <a href="https://github.com/hugelton/Felucca/blob/main/CREDITS.md">original credits</a> and <a href="https://github.com/hugelton/Felucca/blob/main/LICENSING.md">licensing details</a>.<p>Original and modified installer source: <a href="https://github.com/gybe808-dotcom/FeluccaWavetableOdeathMod">this repository</a>. <a href="https://github.com/hugelton/Felucca/blob/main/LICENSE">GPL-3.0-only</a>. No warranty. Independent community modification; not endorsed by Hügelton Instruments or M-VAVE.</p></footer>
+</main><script type="module">
+import {Updater} from './web/fm1ota.js';
+import {productOf,logicalImage,sha256hex} from './web/fm1pkg.js';
+const HASH='0a17a97e8603df570539b35f8d0a9cf12d1cb538db5bbe357c3f0e3f9b9a1dad';
+const SIZE=610086, PRODUCT='FM-1_900';
+const $=id=>document.getElementById(id);
+const status=s=>{$('status').textContent=s;log(s)};
+const log=s=>{$('log').textContent+=s+'\n'};
+let image=null,writing=false;
+window.addEventListener('beforeunload',e=>{if(writing){e.preventDefault();e.returnValue='Firmware installation in progress';}});
+(async()=>{
+ try{
+  if(!navigator.requestMIDIAccess)throw Error('WebMIDI unavailable: open this page in desktop Chrome or Edge.');
+  const r=await fetch('./firmware/felucca.fwsc',{cache:'no-store'});
+  if(!r.ok)throw Error('Firmware download returned HTTP '+r.status);
+  const b=new Uint8Array(await r.arrayBuffer());
+  if(b.length!==SIZE)throw Error('Firmware size mismatch.');
+  if(await sha256hex(b)!==HASH)throw Error('Firmware SHA-256 mismatch.');
+  if(productOf(b)!==PRODUCT)throw Error('Firmware product does not match FM-1_900.');
+  image=logicalImage(b);
+  $('firmware').textContent='SOLID 20 v0.7.5 verified • 610,086 bytes • SHA-256 matches.';
+  $('go').disabled=false;status('Ready. Connect FM-1 by USB.');
+ }catch(e){$('firmware').textContent='Firmware unavailable or invalid.';status('STOP: '+e.message)}
+})();
+$('go').addEventListener('click',async()=>{
+ if(!image||writing)return;
+ if(!confirm('Install ODeath SOLID 20 on your FM-1? This modifies the device firmware. Do not disconnect USB until finished.'))return;
+ writing=true;$('go').disabled=true;$('bar').value=0;
+ try{
+  const midi=await navigator.requestMIDIAccess({sysex:true});
+  const up=new Updater(midi,log);
+  const step=(k,n)=>{
+   log(k+' '+(n??''));
+   if(k==='verify')$('bar').value=Math.min(6,Math.max(0,(n||0)/74*6));
+   if(k==='write')$('bar').value=Math.min(99,6+Math.max(0,(n||0)/1167*93));
+   const labels={start:'Device detected',verify:'Verifying with device',loader:'Switching to update mode',write:'Writing firmware — do not unplug',reboot:'Rebooting',done:'Installation complete'};
+   status(labels[k]||k);
+   if(k==='done')$('bar').value=100;
+  };
+  const ota=await up.find(id=>/^ota-/i.test(id.model));
+  if(ota){
+    ota.link.close();
+    status('FM-1 already in update mode; resuming installation.');
+    if(!await up.resume(image,step,PRODUCT))throw Error('Firmware installation not completed; reconnect and retry.');
+  }else{
+    await up.install(image,PRODUCT,step);
+  }
+ }catch(e){status('STOP: '+(e?.message||String(e)));log(e?.stack||String(e))}
+ finally{writing=false;$('go').disabled=!image}
+});
+</script></body></html>
