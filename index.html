@@ -35,7 +35,16 @@ code{word-break:break-all}pre{white-space:pre-wrap;word-break:break-word;font-si
 <p id="status" role="status" aria-live="polite">Preparing…</p>
 <details><summary>Technical log</summary><pre id="log"></pre></details>
 </div>
-<p><strong>Recovery:</strong> If installation is interrupted, reconnect the FM-1 and retry using the same package. Do not assume every failed flash can be recovered through the browser; see <a href="https://github.com/kurogedelic/FM-1-transporter">FM-1 Transporter</a> and the original Felucca instructions.</p>
+<section class="panel" aria-labelledby="rescue-title">
+<h2 id="rescue-title">FM-1 Recovery &amp; Rescue</h2>
+<p>If a firmware update is interrupted or your FM-1 becomes stuck in update mode, do not assume that retrying the browser installer will fix every problem. Check the recovery tools and instructions below before attempting further flashes.</p>
+<ul>
+<li><strong><a href="https://thefirmwarehub.com/">The Firmware Hub — USB Rescue / Rescue a stuck FM-1</a>:</strong> Consult The Firmware Hub for its FM-1 USB rescue guidance and recovery resources when the device is stuck or a firmware update fails.</li>
+<li><strong><a href="https://github.com/Quixotic7/MvaveFM1Unbricker">M-VAVE FM-1 Unbricker (Quixotic7)</a>:</strong> A community hardware-assisted recovery project for an FM-1 that cannot be restored through the normal update process. Follow its repository instructions carefully; additional hardware may be required.</li>
+<li><strong><a href="https://github.com/kurogedelic/FM-1-transporter">FM-1 Transporter</a>:</strong> Another FM-1 firmware transfer and recovery-related resource.</li>
+</ul>
+<p class="dim">These are external community resources, not automatic recovery functions of this installer. Recovery is not guaranteed. Consult the <a href="https://github.com/hugelton/Felucca">original Felucca documentation</a> as well.</p>
+</section>
 <footer><strong>Credits:</strong> Felucca firmware and original web installer: © 2026 Leo Kuroshita (@kurogedelic), <a href="https://hugelton.com">Hügelton Instruments</a>. Wavetable modification: ODeath. Felucca contributors and third-party software: <a href="https://github.com/hugelton/Felucca/blob/main/CREDITS.md">original credits</a> and <a href="https://github.com/hugelton/Felucca/blob/main/LICENSING.md">licensing details</a>.<p>Original and modified installer source: <a href="https://github.com/gybe808-dotcom/FeluccaWavetableOdeathMod">this repository</a>. <a href="https://github.com/hugelton/Felucca/blob/main/LICENSE">GPL-3.0-only</a>. No warranty. Independent community modification; not endorsed by Hügelton Instruments or M-VAVE.</p></footer>
 </main><script type="module">
 import {Updater} from './web/fm1ota.js';
